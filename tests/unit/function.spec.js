@@ -1,4 +1,4 @@
-import { getObjValue } from "@/utils/common.js";
+import { getObjValue, requestForData } from "@/utils/common.js";
 
 describe("test for get nest value in object function", () => {
   const testData = {
@@ -53,5 +53,36 @@ describe("test for get nest value in object function", () => {
     const val = "Megaport";
     let getVal = getObjValue(path, testData);
     expect(getVal).toBe(val);
+  });
+});
+
+describe("test for getMegaportEnabledLocations function", () => {
+  const url = "https://api.megaport.com/v2/locations",
+    method = "get";
+
+  test("request success", () => {
+    return requestForData(url, method)
+      .then((res) => {
+        expect(res).toEqual(
+          expect.objectContaining({
+            data: expect.any(Array),
+            message: expect.any(String),
+            terms: expect.any(String),
+          })
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+  test("request error", () => {
+    return requestForData(url + "error", method).catch((err) => {
+      expect(err).toEqual(
+        expect.objectContaining({
+          terms: expect.any(String),
+          message: expect.any(String),
+        })
+      );
+    });
   });
 });

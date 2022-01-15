@@ -17,3 +17,33 @@ export function getObjValue(path, obj) {
   }
   return "params are not valid";
 }
+/**
+ *
+ * @param {string} url
+ * @param { get | post | delete| put } method
+ * @param {obj} data
+ * @returns { Promise }
+ */
+export function requestForData(url, method, data) {
+  return new Promise((resolve, reject) => {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    if (data) {
+      xhr.send(data);
+    } else {
+      xhr.send();
+    }
+    xhr.onload = () => {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        let result = JSON.parse(xhr.responseText);
+        resolve(result);
+      } else {
+        let result = JSON.parse(xhr.responseText);
+        reject(result);
+      }
+    };
+    xhr.onerror = (err) => {
+      reject(err);
+    };
+  });
+}
