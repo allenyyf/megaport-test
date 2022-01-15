@@ -34,6 +34,10 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="empty-container" v-if="tableData.length === 0">
+      <div>no search result</div>
+    </div>
   </div>
 </template>
 
@@ -122,6 +126,17 @@ export default {
   border-collapse: collapse;
   border-radius: 6px 6px 0 0;
   overflow: hidden;
+}
+
+.empty-container {
+  text-align: center;
+  border: 1px solid #ccc;
+  border-top: 0;
+  text-transform: uppercase;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .table-container thead .header-cell {
