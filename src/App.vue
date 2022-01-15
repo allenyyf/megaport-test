@@ -1,12 +1,23 @@
 <template>
-  <input
-    type="text"
-    placeholder="please input search text"
-    v-model="searchText"
-  />
+  <div class="container">
+    <input
+      class="search-input"
+      type="text"
+      placeholder="please input search text"
+      v-model="searchText"
+    />
 
-  <Table :data="tableData" :headerList="propsList"></Table>
-  <Form :labelList="propsList" @addData="addData"></Form>
+    <Table
+      class="table-container"
+      :data="tableData"
+      :headerList="propsList"
+    ></Table>
+    <Form
+      class="form-container"
+      :labelList="propsList"
+      @addData="addData"
+    ></Form>
+  </div>
 </template>
 
 <script>
@@ -64,14 +75,30 @@ export default {
   },
 };
 </script>
+<style scoped>
+.container .search-input {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.container .table-container {
+  height: 60vh;
+  overflow-y: auto;
+}
+.container .form-container {
+  margin: 20px 0;
+}
+@media only screen and (min-width: 768px) {
+  .container {
+    min-width: 768px;
+    max-width: 60vw;
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    margin: auto;
+  }
 }
 </style>

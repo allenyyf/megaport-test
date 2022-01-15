@@ -70,3 +70,22 @@ export default {
   },
 };
 </script>
+<style scoped>
+.input-item + .input-item {
+  margin-top: 10px;
+}
+.tips-container {
+  text-align: center;
+  margin: 10px 0 10px 100px;
+  color: #ec5564;
+  height: 15px;
+  text-transform: uppercase;
+}
+
+.form-container .button {
+  margin-left: 100px;
+  width: 200px;
+  background-color: #36304a;
+  color: #fff;
+}
+</style>
