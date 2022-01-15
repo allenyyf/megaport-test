@@ -6,15 +6,18 @@
   />
 
   <Table :data="tableData" :headerList="propsList"></Table>
+  <Form :labelList="propsList" @addData="addData"></Form>
 </template>
 
 <script>
 import { ref, watch } from "vue";
 import Table from "@/components/Table";
+import Form from "@/components/Form";
 import { dessertList } from "@/mock/dessertList";
 export default {
   name: "App",
-  components: { Table },
+  components: { Table, Form },
+
   setup() {
     const propsList = getObjectPropsList(dessertList),
       tableData = ref(dessertList),
@@ -45,10 +48,18 @@ export default {
       });
     }
 
+    /**
+     * @params {object} data - same data structure as the object in the init array data
+     */
+    function addData(data) {
+      tableData.value.push(data);
+    }
+
     return {
       propsList,
       tableData,
       searchText,
+      addData,
     };
   },
 };
